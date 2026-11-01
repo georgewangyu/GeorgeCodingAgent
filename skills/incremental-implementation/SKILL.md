@@ -38,7 +38,7 @@ read slice -> implement smallest complete change -> self-check -> commit
 4. **Open or update the PR** for the slice, as a draft unless the user says otherwise. CI on the PR is the build gate. "It passed on my machine" is not evidence.
 5. **Wait for CI** on every required job. Red means the fix loop below, not the next slice.
 6. **Run the done check** named in the slice (unit tests at the edges, coverage on new lines, the metric in staging). Paste the evidence link, not "tests pass".
-7. **Review in fresh context**: a reviewer subagent that sees the slice, the diff and the global constraints, not your session. Guard the bar: a lowered threshold, an easier test, a silenced checker or an unfinished stub is a finding, not a fix.
+7. **Review in fresh context** with the generator and evaluator loop below. Guard the bar: a lowered threshold, an easier test, a silenced checker or an unfinished stub is a finding, not a fix.
 8. **Mark the slice done** in the plan index with the PR link. Only then start the next slice.
 
 ## Who builds each slice [bl: strong]
@@ -78,10 +78,20 @@ No drive-by refactors, import reshuffles, modernized syntax or extra features. N
 - **Rollback-friendly.** Additive first. Do not delete something and replace it in the same revision. Name what a rollback of this slice leaves behind.
 - **Flags for incomplete work.** If a slice must merge before the feature is ready, it ships behind a flag that is off.
 
+## Review loop: generator and evaluator [bl: strong]
+
+You generate, a fresh read-only reviewer evaluates. Never grade your own slice in your own context.
+
+1. Write the slice's diff to a file (`git diff <base>... > /tmp/<slice>.patch`).
+2. Spawn `george-coding-agent:reviewer` (in a tool without agents: a fresh subagent told not to edit anything) with only the patch, the slice's contract (goal and done check) and the checklist: `code-review-and-quality/references/cr-review-checklist.md` for code, `doubt-driven-review/references/design-review-checklist.md` for a spec or plan.
+3. Fix each real finding in the same slice. A finding you reject gets a one-line reason in the ledger.
+4. Re-review the new diff the same way until the reviewer returns no blocking findings, capped at three rounds. Past the cap, write a ruling (see the fix loop) instead of a fourth round.
+5. Optional blind pass for a risky slice: one more reviewer given only the patch, no contract and no checklist, to catch what the framing hid.
+
 ## Fix loop [bl: strong]
 
 - Red CI: read the failed job's log, fix the root cause, push a new revision. Do not retry unchanged code.
-- Review finding: fix it in the same slice, push a revision, re-review only the fix.
+- Review finding: fix it in the same slice, push a revision, re-review (the review loop above).
 - Cap at three rounds per slice. Past the cap, write a ruling (what you decided, why, what it costs if wrong) and either park the finding for the user or re-plan the slice. Rounds past the cap do not converge.
 - A failure that also breaks the main branch or other PRs is not your diff. Show the evidence (the same job failing with no PR) and move on.
 

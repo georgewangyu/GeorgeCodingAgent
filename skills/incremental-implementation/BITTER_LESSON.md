@@ -15,6 +15,7 @@ candidate to expire. Checker: `tools/bitter_lesson.py`.
 | Rule 0: simplicity first | strong | Heuristic with strong evidence (Addy, pstack laziness and subtract). Could become a learned example or a diff-size check in review. | 2027-04-29 | | |
 | Scope discipline: log, do not fix | strong | Reviewability: drive-by edits hide in diffs. Could become a hard check (files outside the slice's Files line). | 2027-04-29 | | |
 | Change rules | strong | Safe defaults, one change per revision and rollback-friendly order are deploy protocol. Rollout ordering is one of the most repeated agent mistakes in review. | 2027-04-29 | | |
+| Review loop: generator and evaluator | strong | A fresh read-only evaluator catches what the author's context hides. Could become a hard gate that blocks a slice without a clean reviewer verdict. | 2027-05-01 | | |
 | Fix loop | strong | A cap stops non-converging retry churn (superpowers). The round count is a proxy a smarter model may not need. | 2027-04-29 | | |
 | Rulings, not stalls | strong | Protocol shared with start-playbook rule 2: decide two-way doors, stop on one-way doors. | 2027-04-29 | | |
 | Keep a ledger | strong | Compaction loses state; re-running finished slices is the costliest failure superpowers observed. Longer context may shrink it. | 2027-04-29 | | |
