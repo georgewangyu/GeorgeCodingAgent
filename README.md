@@ -16,7 +16,15 @@ claude --agent george-coding-agent:coding
 
 Review in a fresh, read-only context: `claude --agent george-coding-agent:reviewer`, or from the coding agent through `code-review-and-quality` and `doubt-driven-review`.
 
-Codex: `codex plugin marketplace add georgewangyu/GeorgeCodingAgent`, then install from the plugins directory. Codex gets the skills; start a worker with "load role-coding" in its brief.
+Codex (CLI 0.122 or later):
+
+```sh
+codex plugin marketplace add georgewangyu/GeorgeCodingAgent
+codex plugin add george-coding-agent@george-coding-agent
+codex   # then: "Load $role-coding first. <task>"
+```
+
+Codex has no agent files, so a worker takes its role from a skill: `$role-coding` or `$role-reviewer` at the start of its prompt. The reviewer's read-only tools are not enforced by the skill; run it as `codex exec --sandbox read-only 'Load $role-reviewer first. ...'` to enforce them. The coding role's review loop does this itself. Start a new Codex session after installing so the skills are discovered. Codex path status: manifests validated against Codex's schema, not yet run end to end.
 
 Any tool, skills only: `npx skills add georgewangyu/GeorgeCodingAgent`.
 

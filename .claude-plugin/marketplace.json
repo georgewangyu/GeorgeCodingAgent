@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "george-coding-agent",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "source": "./",
       "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.",
       "homepage": "https://github.com/georgewangyu/GeorgeCodingAgent",
