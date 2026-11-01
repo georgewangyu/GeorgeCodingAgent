@@ -3,26 +3,58 @@
   "id": "george-coding-agent",
   "name": "GeorgeCodingAgent",
   "version": "0.1.0",
-  "description": "Coding extension for Jarvis: a coding worker agent plus the build, verify, review and ship skills it uses.",
+  "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.",
   "repo": "georgewangyu/GeorgeCodingAgent",
   "license": "MIT",
-  "author": {"name": "George Wang", "url": "https://github.com/georgewangyu"},
-  "keywords": ["coding", "skills", "tdd", "review", "ship"],
+  "author": {
+    "name": "George Wang",
+    "url": "https://github.com/georgewangyu"
+  },
+  "keywords": [
+    "coding",
+    "skills",
+    "tdd",
+    "review",
+    "planning",
+    "ship"
+  ],
   "agents": [
-    {"name": "coding", "summary": "coding worker that builds or fixes code one verified slice at a time", "dispatch_when": "implement, fix, refactor, test or build work in a code repo"}
+    {
+      "name": "coding",
+      "summary": "coding worker that builds or fixes code one verified slice at a time",
+      "dispatch_when": "implement, fix, refactor, test or build work in a code repo"
+    },
+    {
+      "name": "reviewer",
+      "summary": "fresh-context read-only reviewer that grades a diff, doc or plan against its contract and a checklist",
+      "dispatch_when": "a diff, doc or plan needs an adversarial review"
+    }
   ],
   "skills": [
-    "incremental-implementation", "source-driven-development", "api-and-interface-design",
-    "frontend-ui-engineering", "test-driven-development", "browser-testing",
-    "debugging-and-error-recovery", "code-review-and-quality", "code-simplification",
-    "security-and-hardening", "performance-optimization", "quality-constraints",
-    "git-workflow-and-versioning", "ci-cd-and-automation", "deprecation-and-migration",
-    "observability-and-instrumentation", "shipping-and-launch"
+    "start-playbook",
+    "spec-driven-development",
+    "planning-and-task-breakdown",
+    "doubt-driven-review",
+    "context-engineering",
+    "documentation-and-adrs",
+    "incremental-implementation",
+    "source-driven-development",
+    "api-and-interface-design",
+    "frontend-ui-engineering",
+    "test-driven-development",
+    "browser-testing",
+    "debugging-and-error-recovery",
+    "code-review-and-quality",
+    "code-simplification",
+    "security-and-hardening",
+    "performance-optimization",
+    "quality-constraints",
+    "git-workflow-and-versioning",
+    "ci-cd-and-automation",
+    "deprecation-and-migration",
+    "observability-and-instrumentation",
+    "shipping-and-launch"
   ],
-  "relies_on_core": [
-    "planning-and-task-breakdown", "spec-driven-development", "doubt-driven-review",
-    "context-engineering", "documentation-and-adrs", "mistake-miner", "brainstorm", "grill-me",
-    "principles-first-principles", "principles-scientific-method"
-  ],
+  "relies_on_core": [],
   "requires": []
 }

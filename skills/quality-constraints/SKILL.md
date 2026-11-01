@@ -5,6 +5,8 @@ description: The top-down half of the quality bar. On an existing package, detec
 
 # Constraints
 
+> Optional skills from other plugins: `grill-me`, `brainstorm`, `mistake-miner` and the `principles*` skills. Use them when installed; when they are not, skip that step or do it inline.
+
 Write the bar down once, check it by machine, and make lowering it loud.
 
 ## When to use

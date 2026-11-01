@@ -11,17 +11,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: georgewangyu/JarvisAIGeorge
-          path: .core
-          sparse-checkout: plugins/jarvis-ai-george/skills/principles-bitter-lesson
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Generated adapters match sources, frontmatter, duplicate skill names
         run: python3 tools/jarvis-build.py --check
       - name: Bitter-lesson tags
-        run: python3 .core/plugins/jarvis-ai-george/skills/principles-bitter-lesson/scripts/bitter_lesson.py check --root .
+        run: python3 tools/bitter_lesson.py check --root .
       - name: Scrub (public marker list)
         run: tools/scrub-lint/scripts/scrub-lint check --lists public

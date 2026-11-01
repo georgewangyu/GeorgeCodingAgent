@@ -2,21 +2,20 @@
 
 # GeorgeCodingAgent
 
-Coding extension for Jarvis: a coding worker agent plus the build, verify, review and ship skills it uses.
+Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.
 
 ## Roles
 
 | Role | When | Claude Code | Other tools |
 |---|---|---|---|
 | `coding` | implement, fix, refactor, test or build work in a code repo | `claude --agent george-coding-agent:coding` | load skill `role-coding` |
+| `reviewer` | a diff, doc or plan needs an adversarial review | `claude --agent george-coding-agent:reviewer` | load skill `role-reviewer` |
 
 Each role's must-follow rules are inside its agent file (Claude Code) and its role skill (other tools). This file is not loaded by Claude Code from inside a plugin.
 
 ## Skills
 
-`incremental-implementation`, `source-driven-development`, `api-and-interface-design`, `frontend-ui-engineering`, `test-driven-development`, `browser-testing`, `debugging-and-error-recovery`, `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`, `quality-constraints`, `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `observability-and-instrumentation`, `shipping-and-launch`
-
-Relies on core (install the core plugin first): `planning-and-task-breakdown`, `spec-driven-development`, `doubt-driven-review`, `context-engineering`, `documentation-and-adrs`, `mistake-miner`, `brainstorm`, `grill-me`, `principles-first-principles`, `principles-scientific-method`
+`start-playbook`, `spec-driven-development`, `planning-and-task-breakdown`, `doubt-driven-review`, `context-engineering`, `documentation-and-adrs`, `incremental-implementation`, `source-driven-development`, `api-and-interface-design`, `frontend-ui-engineering`, `test-driven-development`, `browser-testing`, `debugging-and-error-recovery`, `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`, `quality-constraints`, `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `observability-and-instrumentation`, `shipping-and-launch`
 
 ## Editing
 

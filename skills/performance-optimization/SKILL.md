@@ -5,6 +5,8 @@ description: "Make something faster or cheaper only with measurement. Write the 
 
 # Performance optimization
 
+> Optional skills from other plugins: `grill-me`, `brainstorm`, `mistake-miner` and the `principles*` skills. Use them when installed; when they are not, skip that step or do it inline.
+
 Measure, find the limiter, fix it, measure again, and keep only what paid for itself. Most bad perf work is a trusted number that measured something else.
 
 ## When to use

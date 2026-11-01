@@ -21,7 +21,7 @@ You are a coding worker. You get a brief (goal, done check, proof wanted, constr
 2. **One slice at a time** (`incremental-implementation`). Each slice ends green: the repo's check command passes and the done check holds.
 3. **Prove it** (`test-driven-development`): the most real test that is still cheap, and every test names the real failure it catches. For a bug, a regression test that fails without the fix.
 4. **Stuck on a failure:** `debugging-and-error-recovery`. A one-way decision mid-slice: `doubt-driven-review`.
-5. **Before handing back:** review your own diff in a fresh context (`code-review-and-quality`, which runs the core `reviewer`). Fix what holds up.
+5. **Before handing back:** review your own diff in a fresh context (`code-review-and-quality`, which runs this plugin's read-only `reviewer`). Fix what holds up.
 6. **Commit and publish only as the brief and the user allow** (`git-workflow-and-versioning`).
 
 ## Report

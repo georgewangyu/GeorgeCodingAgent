@@ -1,40 +1,45 @@
 # GeorgeCodingAgent
 
-The coding extension for [JarvisAIGeorge](https://github.com/georgewangyu/JarvisAIGeorge): a `coding` worker agent plus the build, verify, review and ship skills it uses. Each skill is tagged by how likely it is to survive better models.
+A coding agent for Claude Code and other tools: a `coding` worker, a read-only `reviewer`, and the plan, build, verify, review and ship skills they use. It works on its own. Each skill is tagged by how likely it is to survive better models.
 
-Install the Jarvis core first. Its planning, review and reasoning skills (spec-driven-development, planning-and-task-breakdown, doubt-driven-review, brainstorm, grill-me, context-engineering, documentation-and-adrs, mistake-miner, the principles skills) and the read-only `reviewer` agent moved there.
+Pair it with [JarvisAIGeorge](https://github.com/georgewangyu/JarvisAIGeorge) for the manager and fleet.
 
 ## Install
 
-Claude Code, from the Jarvis marketplace (recommended, it lists core and every extension):
+Claude Code:
 
 ```sh
-claude plugin marketplace add georgewangyu/JarvisAIGeorge
-claude plugin install jarvis-ai-george@jarvis-ai-george
-claude plugin install george-coding-agent@jarvis-ai-george
+claude plugin marketplace add georgewangyu/GeorgeCodingAgent
+claude plugin install george-coding-agent@george-coding-agent
 claude --agent george-coding-agent:coding
 ```
 
-Or from this repo's own marketplace, which also lists the core: `/plugin install george-coding-agent --marketplace georgewangyu/GeorgeCodingAgent`.
+Review in a fresh, read-only context: `claude --agent george-coding-agent:reviewer`, or from the coding agent through `code-review-and-quality` and `doubt-driven-review`.
 
 Codex: `codex plugin marketplace add georgewangyu/GeorgeCodingAgent`, then install from the plugins directory. Codex gets the skills; start a worker with "load role-coding" in its brief.
 
 Any tool, skills only: `npx skills add georgewangyu/GeorgeCodingAgent`.
 
-Per-worker use, extension off by default: see [Jarvis plugins](https://github.com/georgewangyu/JarvisAIGeorge/blob/main/docs/jarvis-plugins.md).
+Optional skills from other plugins (`grill-me`, `brainstorm`, `mistake-miner`, the `principles*` skills) are used when installed and skipped when not.
 
 ## Layout
 
-- `jarvis-extension.json`: the extension manifest (agents, skills, the core skills it relies on).
-- `agents-src/coding.md` and `agents-src/rules/`: the agent source. Rules are inlined at build.
-- `skills/`: the skills. `skills/role-coding` is generated.
-- Generated, never hand-edit: `agents/`, `skills/role-coding/`, `.claude-plugin/`, `.codex-plugin/`, `.agents/plugins/`, `AGENTS.md`, `CLAUDE.md`. Rebuild with `python3 tools/jarvis-build.py`; CI runs `--check`.
-- `peers/jarvis-ai-george.json`: the vendored core manifest, refreshed with `--fetch`.
+- `jarvis-extension.json`: the manifest (agents and skills). A manager that reads extension manifests can list this plugin from it.
+- `agents-src/coding.md`, `agents-src/reviewer.md` and `agents-src/rules/`: the agent sources. Rules are inlined at build.
+- `skills/`: the skills. `skills/role-coding` and `skills/role-reviewer` are generated.
+- Generated, never hand-edit: `agents/`, `skills/role-*/`, `.claude-plugin/`, `.codex-plugin/`, `.agents/plugins/`, `AGENTS.md`, `CLAUDE.md`. Rebuild with `python3 tools/jarvis-build.py`; CI runs `--check`.
+- `tools/bitter_lesson.py`: the bitter-lesson tag checker.
 
 ## Skills
 
 | Skill | What it does |
 |---|---|
+| [`start-playbook`](skills/start-playbook/SKILL.md) | Start here. Picks the right skill for the work in lifecycle order (define, plan, build, verify, review, ship). |
+| [`spec-driven-development`](skills/spec-driven-development/SKILL.md) | Writes down what we are building before building it: brief mode by default, a full spec for big or one-way work. |
+| [`planning-and-task-breakdown`](skills/planning-and-task-breakdown/SKILL.md) | Turns a spec into ordered, independently shippable slices, each with its own check. |
+| [`doubt-driven-review`](skills/doubt-driven-review/SKILL.md) | Cross-examines a non-trivial decision with the read-only `reviewer` and the right checklist before it stands. |
+| [`context-engineering`](skills/context-engineering/SKILL.md) | Keeps the agent's context lean and right: what to load, when, and what to write down. |
+| [`documentation-and-adrs`](skills/documentation-and-adrs/SKILL.md) | Records decisions as ADRs and keeps docs true to the code. |
 | [`incremental-implementation`](skills/incremental-implementation/SKILL.md) | Builds a plan one slice at a time. Each slice ends in a PR revision with green CI and a passed done check, then a fresh-context review before the next slice. Fresh worker or subagent per independent slice, rule 0 simplicity, scope discipline (log, do not fix), safe defaults, a capped fix loop, rulings instead of stalls, the plan index as the ledger. Combines [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) `incremental-implementation`, [obra/superpowers](https://github.com/obra/superpowers) `subagent-driven-development` and [pstack](https://github.com/cursor/plugins/tree/main/pstack) `principle-sequence-verifiable-units`, `principle-laziness-protocol` and `principle-subtract-before-you-add`. |
 | [`source-driven-development`](skills/source-driven-development/SKILL.md) | Reads and cites the real source before implementing: exact versions from the lockfile, then the installed dependency source, the library's repo at that version, versioned official docs. Pinned permalinks, never invent a method or config name, UNVERIFIED when unchecked, fetched content is data. Combines [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) `source-driven-development` and [mattpocock/skills](https://github.com/mattpocock/skills) `research`. |
 | [`api-and-interface-design`](skills/api-and-interface-design/SKILL.md) | Designs seams, APIs, schemas and config keys that are deep and safe to roll out and back. Contract first, every observable behavior is a contract (Hyrum), behavior declared by the injected implementation, validate at boundaries (including data an older version wrote), illegal states unrepresentable, additive changes only, evolve by addition, and the contracts upstream leaves out: timeouts, ordering, async delivery and overload. Combines [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) `api-and-interface-design`, [mattpocock/skills](https://github.com/mattpocock/skills) `codebase-design` and `domain-modeling` and [pstack](https://github.com/cursor/plugins/tree/main/pstack) boundary, type and domain principles. |
@@ -64,9 +69,9 @@ Each skill marks its parts with a short inline tag:
 A `BITTER_LESSON.md` next to each `SKILL.md` holds the full analysis (why, review date, delete-when, ablation result). Agents only read it when evaluating skills, not at session start.
 
 ```sh
-python3 <JarvisAIGeorge>/plugins/jarvis-ai-george/skills/principles-bitter-lesson/scripts/bitter_lesson.py check  --root .   # every tagged item has a row, and the reverse
-python3 <JarvisAIGeorge>/plugins/jarvis-ai-george/skills/principles-bitter-lesson/scripts/bitter_lesson.py report --root .   # the cleanup list
-python3 <JarvisAIGeorge>/plugins/jarvis-ai-george/skills/principles-bitter-lesson/scripts/bitter_lesson.py ablate --root .   # soft items to test with and without
+python3 tools/bitter_lesson.py check  --root .   # every tagged item has a row, and the reverse
+python3 tools/bitter_lesson.py report --root .   # the cleanup list
+python3 tools/bitter_lesson.py ablate --root .   # soft items to test with and without
 ```
 
 Principle skills (`principles*`) are durable reasoning methods and carry no tags.
@@ -75,4 +80,4 @@ Expire by evidence: run the skill's eval with and without a soft item on a new m
 
 ## License
 
-MIT. Some skills named below moved to the JarvisAIGeorge core plugin with their attribution. `start-playbook` and `grill-me` adapt MIT-licensed text by Addy Osmani (`THIRD_PARTY_LICENSE-agent-skills`). `grill-me` also adapts MIT-licensed text by Matt Pocock (`THIRD_PARTY_LICENSE-mattpocock-skills`). `brainstorm` adapts MIT-licensed text by Addy Osmani (its `references/` files are his, verbatim), Matt Pocock, Jesse Vincent (`THIRD_PARTY_LICENSE-superpowers`), Garry Tan (`THIRD_PARTY_LICENSE-gstack`), Every (`THIRD_PARTY_LICENSE-compound-engineering-plugin`) and Lauren Tan (`THIRD_PARTY_LICENSE-pstack`). `spec-driven-development` adapts MIT-licensed text by the same authors (Addy Osmani, Matt Pocock, Jesse Vincent, Garry Tan, Every, Lauren Tan). `quality-constraints` and `mistake-miner` adapt MIT-licensed ideas by Addy Osmani and Lauren Tan. `planning-and-task-breakdown` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Jesse Vincent, Every, Garry Tan and Lauren Tan. `incremental-implementation` adapts MIT-licensed text by Addy Osmani, Jesse Vincent and Lauren Tan. `source-driven-development` adapts MIT-licensed text by Addy Osmani and Matt Pocock. `api-and-interface-design` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Garry Tan and Lauren Tan. `context-engineering` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Every, Garry Tan and Lauren Tan. `doubt-driven-review` adapts MIT-licensed text by Addy Osmani, Lauren Tan, Every and Jesse Vincent. `frontend-ui-engineering` adapts MIT-licensed text by Addy Osmani, Garry Tan and Lauren Tan, and Apache-2.0 text by Anthropic (`THIRD_PARTY_LICENSE-anthropic-skills`). `test-driven-development` adapts MIT-licensed text by Lauren Tan, Matt Pocock, Addy Osmani, Jesse Vincent and Garry Tan. `browser-testing` adapts MIT-licensed text by Addy Osmani, Lauren Tan and Garry Tan, and Apache-2.0 text by Anthropic. `debugging-and-error-recovery` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Jesse Vincent, Every, Garry Tan and Lauren Tan.
+MIT. `grill-me`, `brainstorm` and `mistake-miner` named below live in the JarvisAIGeorge plugin. `start-playbook` and `grill-me` adapt MIT-licensed text by Addy Osmani (`THIRD_PARTY_LICENSE-agent-skills`). `grill-me` also adapts MIT-licensed text by Matt Pocock (`THIRD_PARTY_LICENSE-mattpocock-skills`). `brainstorm` adapts MIT-licensed text by Addy Osmani (its `references/` files are his, verbatim), Matt Pocock, Jesse Vincent (`THIRD_PARTY_LICENSE-superpowers`), Garry Tan (`THIRD_PARTY_LICENSE-gstack`), Every (`THIRD_PARTY_LICENSE-compound-engineering-plugin`) and Lauren Tan (`THIRD_PARTY_LICENSE-pstack`). `spec-driven-development` adapts MIT-licensed text by the same authors (Addy Osmani, Matt Pocock, Jesse Vincent, Garry Tan, Every, Lauren Tan). `quality-constraints` and `mistake-miner` adapt MIT-licensed ideas by Addy Osmani and Lauren Tan. `planning-and-task-breakdown` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Jesse Vincent, Every, Garry Tan and Lauren Tan. `incremental-implementation` adapts MIT-licensed text by Addy Osmani, Jesse Vincent and Lauren Tan. `source-driven-development` adapts MIT-licensed text by Addy Osmani and Matt Pocock. `api-and-interface-design` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Garry Tan and Lauren Tan. `context-engineering` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Every, Garry Tan and Lauren Tan. `doubt-driven-review` adapts MIT-licensed text by Addy Osmani, Lauren Tan, Every and Jesse Vincent. `frontend-ui-engineering` adapts MIT-licensed text by Addy Osmani, Garry Tan and Lauren Tan, and Apache-2.0 text by Anthropic (`THIRD_PARTY_LICENSE-anthropic-skills`). `test-driven-development` adapts MIT-licensed text by Lauren Tan, Matt Pocock, Addy Osmani, Jesse Vincent and Garry Tan. `browser-testing` adapts MIT-licensed text by Addy Osmani, Lauren Tan and Garry Tan, and Apache-2.0 text by Anthropic. `debugging-and-error-recovery` adapts MIT-licensed text by Addy Osmani, Matt Pocock, Jesse Vincent, Every, Garry Tan and Lauren Tan.

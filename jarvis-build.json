@@ -2,13 +2,14 @@
   "schema": 1,
   "plugin_dir": ".",
   "peers_dir": "peers",
-  "peers": [
-    {"repo": "georgewangyu/JarvisAIGeorge", "ref": "main", "manifest_path": "plugins/jarvis-ai-george/jarvis-extension.json"}
-  ],
+  "peers": [],
   "marketplace": {
     "name": "george-coding-agent",
     "display_name": "GeorgeCodingAgent",
-    "description": "The Jarvis coding extension, plus the Jarvis core it relies on.",
-    "owner": {"name": "George Wang", "url": "https://github.com/georgewangyu"}
+    "description": "GeorgeCodingAgent: a coding worker, a read-only reviewer, and the skills they use.",
+    "owner": {
+      "name": "George Wang",
+      "url": "https://github.com/georgewangyu"
+    }
   }
 }

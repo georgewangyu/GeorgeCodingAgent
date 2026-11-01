@@ -5,7 +5,7 @@ evaluating the skill (cleanup, `report`, `ablate`). One row per tagged item,
 keyed by the item's first words. Verdicts from the 2026-10-30 design.
 Tags: invariant = rules of the game, always follow. strong = follow it, should
 become a hard check or learned example. soft = guidance for weaker models,
-candidate to expire. Checker: `skills/principles-bitter-lesson`.
+candidate to expire. Checker: `tools/bitter_lesson.py`.
 
 The principles section carries no tag: it is evidence mined from real
 investigations, kept as reference, and refreshed by mining, not by ablation.

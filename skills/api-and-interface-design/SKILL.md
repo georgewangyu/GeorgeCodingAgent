@@ -5,6 +5,8 @@ description: Design module seams, APIs, config keys, schemas and other contracts
 
 # Interfaces
 
+> Optional skills from other plugins: `grill-me`, `brainstorm`, `mistake-miner` and the `principles*` skills. Use them when installed; when they are not, skip that step or do it inline.
+
 A good interface is small, deep and honest: little to learn, a lot behind it, and nothing a caller can observe that you are not willing to keep.
 
 ## When to use

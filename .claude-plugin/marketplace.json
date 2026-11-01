@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "george-coding-agent",
-  "description": "The Jarvis coding extension, plus the Jarvis core it relies on.",
+  "description": "GeorgeCodingAgent: a coding worker, a read-only reviewer, and the skills they use.",
   "owner": {
     "name": "George Wang",
     "url": "https://github.com/georgewangyu"
@@ -11,20 +11,8 @@
       "name": "george-coding-agent",
       "version": "0.1.0",
       "source": "./",
-      "description": "Coding extension for Jarvis: a coding worker agent plus the build, verify, review and ship skills it uses.",
+      "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.",
       "homepage": "https://github.com/georgewangyu/GeorgeCodingAgent",
-      "license": "MIT"
-    },
-    {
-      "name": "jarvis-ai-george",
-      "version": "0.1.0",
-      "source": {
-        "source": "git-subdir",
-        "url": "georgewangyu/JarvisAIGeorge",
-        "path": "plugins/jarvis-ai-george"
-      },
-      "description": "Jarvis core: the manager agent, a read-only reviewer, and the planning, review and reasoning skills every extension relies on.",
-      "homepage": "https://github.com/georgewangyu/JarvisAIGeorge",
       "license": "MIT"
     }
   ]

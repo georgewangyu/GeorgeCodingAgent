@@ -5,6 +5,8 @@ description: "Find and fix the real cause of a failure. Stop the line, build a f
 
 # Debugging and error recovery
 
+> Optional skills from other plugins: `grill-me`, `brainstorm`, `mistake-miner` and the `principles*` skills. Use them when installed; when they are not, skip that step or do it inline.
+
 No fix before a cause. Get a signal that goes red on this bug, narrow it by comparison, fix where it first went wrong, and leave a guard behind.
 
 ## When to use
