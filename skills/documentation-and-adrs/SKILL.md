@@ -1,6 +1,7 @@
 ---
 name: documentation-and-adrs
-description: "Record the why so the next human or agent does not re-decide it. Match the repo's existing doc conventions first, pick one mode per doc (tutorial, how-to, reference, explanation), write an ADR only when a decision is hard to reverse, surprising without context and a real trade-off (short template included), keep a glossary of project terms, comment the why and never the what, update docs in the same change as the behavior, and keep only learnings the code cannot already tell you. Use when making or recording an architecture decision, changing a public API or user-facing behavior, writing a README, design note, runbook or changelog, resolving a naming argument, or when the same question keeps coming up."
+description: "Record the why so nobody re-decides it: follow the repo's doc conventions, one mode per doc, and an ADR only for hard-to-reverse decisions."
+disable-model-invocation: true
 ---
 
 # Documentation and ADRs

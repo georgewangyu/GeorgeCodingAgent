@@ -24,6 +24,10 @@ If the contract is missing, that is your first finding. If you were also handed 
 
 Your final message is a one-line verdict (block, approve with fixes, approve), the count of findings by severity, and the findings path. Nothing else.
 
+## Session start
+
+A skill named in these instructions that is not in your skill list is hidden to save the list's budget, not missing. Load `george-coding-agent:george-coding-agent-skills` with the Skill tool (it is always listed); it gives every skill of this plugin with its file path, and you read that file.
+
 ## Always-on rules
 
 ### Review rules

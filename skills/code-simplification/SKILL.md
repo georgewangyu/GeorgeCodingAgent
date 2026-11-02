@@ -1,6 +1,7 @@
 ---
 name: code-simplification
-description: "Make code easier to read without changing what it does. Scope to the change, understand before removing (Chesterton's fence, git history), preserve behavior exactly, follow the repo's conventions, subtract before you add, minimize reader load (layers to trace, state to hold), clarity over cleverness, one simplification at a time and refactors in their own PR. Comments the diff adds are judged by a fresh agent. Mechanical cleanup passes go to the built-in /simplify. Use when a change works but reads heavier than it should, when review flags complexity, convoluted control flow, a one-caller wrapper, a mode flag, dead code or a knob with no caller, or when the user says simplify, clean up, deslop or reduce complexity."
+description: "Make code easier to read without changing behavior: scope to the change, understand before removing, follow repo conventions, subtract before adding."
+disable-model-invocation: true
 ---
 
 # Code simplification

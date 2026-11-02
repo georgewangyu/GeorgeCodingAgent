@@ -1,6 +1,7 @@
 ---
 name: quality-constraints
-description: The top-down half of the quality bar. On an existing package, detect the gates that already run (linters, coverage gates, static analysis, CI) and report them as the bar, with no new file. On a greenfield project, write CONSTRAINTS.md once (a short grill-me round with defaults), and later runs read it. Every rule records its origin, declared or mined. Guards the bar on every diff (threshold moved, test made easier, checker silenced, unfinished work, new exception) so loosening is loud. Use when the user says "constraints", "quality bar", "set up our standards", "what gates does this package have", when starting a new project, or when an agent keeps silencing checks to get green. The bottom-up half is mistake-miner.
+description: "The top-down quality bar: report the gates a repo already runs, or write a short constraints file for a new project. Use when setting or checking the bar."
+disable-model-invocation: true
 ---
 
 # Constraints

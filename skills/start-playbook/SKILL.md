@@ -1,6 +1,7 @@
 ---
 name: start-playbook
-description: Start here. Discovers and invokes the right skill for the work at hand, in lifecycle order (define, plan, build, verify, review, ship), and sets the always-on operating behaviors. Use when starting a session, or when you need to decide which skill or workflow applies. Adapted from addyosmani/agent-skills using-agent-skills, with bitter-lesson tags on each part.
+description: "Start here: pick the right skill for the work in lifecycle order (define, plan, build, verify, review, ship). Use at session start or when unsure which skill applies."
+disable-model-invocation: true
 ---
 
 # Using Agent Skills

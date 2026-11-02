@@ -1,6 +1,7 @@
 ---
 name: doubt-driven-review
-description: "Cross-examine a non-trivial decision before it stands. A thin router: name the claim, hand only the artifact and its contract to the right fresh-context reviewer (code, design doc, change plan, comments, or a general reviewer) with the right lens, add a second model for one-way doors, then reconcile every finding and stop after three cycles. In-flight, not the final review. Use when about to commit non-trivial code, claim something is safe, add a seam to a multi-PR series, take a one-way door, or when the user says doubt, challenge this, stress test, find blind spots, or tear this apart."
+description: "Cross-examine a non-trivial decision with a fresh read-only reviewer and the right checklist before it stands. Use before committing risky work or taking a one-way door."
+disable-model-invocation: true
 ---
 
 # Doubt

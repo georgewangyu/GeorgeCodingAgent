@@ -1,6 +1,7 @@
 ---
 name: frontend-ui-engineering
-description: "Build or change UI: an app's screens (dashboards, settings, editors) and the HTML artifacts an agent writes for a person to review. Read the project's own UI rules first, name the mode (operate, read, persuade), keep one owner per piece of state, use the design system's tokens and not AI defaults, hold the accessibility floor (keyboard, focus only on user action, labels, contrast, reduced motion), and verify in the running app with a screenshot you look at. Charts go through a dataviz skill. Use when touching components, a theme, a dialog, a layout, an HTML artifact, or UI copy."
+description: "Build or change UI, app screens or HTML artifacts for people: follow the project's UI rules, name the mode, and check the result in a real browser."
+disable-model-invocation: true
 ---
 
 # Frontend

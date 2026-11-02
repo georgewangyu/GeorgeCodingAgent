@@ -1,6 +1,6 @@
 ---
 name: code-review-and-quality
-description: "The method for reviewing a code change, and for receiving a review on your own. Pin the intent, check size and description, read the tests first, then two separate passes: Spec (does it do what the issue and plan asked, no scope creep, no drift from a multi-PR plan) and Standards (repo rules plus a design-fit check for the 18 kinds of comment human reviewers actually leave: parallel scaffolding, missing why, dead knobs, wrong docs, concurrency, magic values, team vocabulary, logs vs metrics, mode flags, tests, control flow, placement, scope, plan drift, rollout defaults, performance, types, imports). Navigate past the diff, find the blast radius and prove the one fact it is safe because of, falsify the claims, refute each finding with a separate lens, suppress aggressively, write short plain comments. Receiving: verify each comment technically, then fix and reply Will fix, no performative praise. Use when reviewing a PR, a diff or your own change before opening it, or when review comments arrive on your PR."
+description: "Review a code change, or receive a review: pin the intent, read tests first, then spec and quality passes with a fresh read-only reviewer and the cr-review checklist."
 ---
 
 # Code review and quality

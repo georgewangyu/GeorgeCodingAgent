@@ -1,6 +1,7 @@
 ---
 name: ci-cd-and-automation
-description: "Automate the quality bar so no change merges or ships without it. One check command that the pre-commit hook and required CI both run, gates ordered fast to slow with fail fast, required checks and no direct pushes on a shared main, CI failures fed back to the agent as structured input, a babysit loop with bounds (rounds, wall clock, stop on human activity), releases from tags or release-please with a changelog, deploys with previews, staged rollout, a canary against a baseline and a written rollback, dependency bots and supply-chain scans, and public-repo hygiene (scrub before push, no secrets in logs, actions pinned by SHA). Per-language starter snippets. Use when setting up or changing CI, pre-commit hooks, release or deploy workflows, branch protection, Dependabot or Renovate, when CI is red or slow, or when watching a pull request until it is ready."
+description: "Automate the quality bar: one check command that hooks and required CI both run, fast gates first, protected main, and safe release and deploy steps."
+disable-model-invocation: true
 ---
 
 # CI/CD and automation

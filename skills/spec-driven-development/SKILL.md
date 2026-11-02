@@ -1,6 +1,7 @@
 ---
 name: spec-driven-development
-description: Write down what we are building before building it. Brief mode by default, five one-line fields (goal, done check, proof wanted, what we know, constraints) plus out of scope, which is also the format for worker briefs. Full mode only when earned (one-way doors, multi-PR work, cross-team review, a new service or API) synthesizes a design doc from the settled intent and decision, with a scope check, boundaries, test seams, and a design contract for multi-PR work, then sends it to review. Use when the user says "spec", "write a spec", "brief this", "design doc", "what are we building", after grill-me or brainstorm settles a direction, or before handing work to a worker.
+description: "Write down what we are building before building it: a five-line brief (goal, done check, proof, known, constraints) by default, a full spec for big or one-way work."
+disable-model-invocation: true
 ---
 
 # Spec

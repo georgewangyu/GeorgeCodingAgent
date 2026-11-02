@@ -28,6 +28,8 @@ Codex has no agent files, so a worker takes its role from a skill: `$role-coding
 
 Any tool, skills only: `npx skills add georgewangyu/GeorgeCodingAgent`.
 
+Only a few skills stay in the tool's skill list (the router `george-coding-agent-skills`, the coding agent's preload skills and `code-review-and-quality`); the router names every other skill with its file, so the list stays small however many skills ship.
+
 Optional skills from other plugins (`grill-me`, `brainstorm`, `mistake-miner`, the `principles*` skills) are used when installed and skipped when not.
 
 ## Layout

@@ -1,6 +1,7 @@
 ---
 name: context-engineering
-description: Put the right context in front of an agent at the right time, and carry it across a boundary without loss. Load (layered docs-first, one example of the pattern, trust levels), keep (guard the window, compress to conclusions, protect the task and the live error), hand off (checkpoint vs final report, worker briefs that always carry the plan, absolute paths and CI as the build gate, follow-ups to the same worker, resume against live state). Use when the user says "what should I load", "write a brief", "hand this off", "save progress", "pick this up", "resume", "context is getting large", or when output quality drops mid-task.
+description: "Put the right context in front of an agent at the right time and carry it across a handoff without loss. Use when writing briefs, steering, or when context runs long."
+disable-model-invocation: true
 ---
 
 # Context

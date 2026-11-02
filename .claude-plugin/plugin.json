@@ -1,6 +1,6 @@
 {
   "name": "george-coding-agent",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.",
   "author": {
     "name": "George Wang",

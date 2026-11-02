@@ -1,6 +1,7 @@
 ---
 name: observability-and-instrumentation
-description: "Make production behavior visible and diagnosable, written alongside the feature like tests. Define working first (the two to four questions on-call will ask), pick the signal for each (metric for how often and how fast, log for why, trace for where), metrics over logs for timings and counts, structured logs with a correlation ID and no secrets, RED and USE with bounded labels and percentiles, symptom alerts with a runbook and a justified threshold, and verify the telemetry itself. Includes reading rules from real investigations: know what a metric measures, small denominators flap, a missing metric is a signal. Use when adding logging, metrics, tracing or alerts, shipping anything that runs in production, reviewing a change with I/O, retries or queues, or after an incident that was hard to diagnose."
+description: "Make production behavior visible as you build: the questions on-call will ask, the right metric, log or trace for each, and alerts that page on real harm."
+disable-model-invocation: true
 ---
 
 # Observability and instrumentation

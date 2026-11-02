@@ -1,6 +1,7 @@
 ---
 name: security-and-hardening
-description: "Harden code against attack, starting from a threat model. Map the trust boundaries (including values that look internal and LLM output), name the assets, run STRIDE over each boundary and write abuse cases as the first tests. Then three tiers: always do (validate at the boundary, parameterize, encode output, no secrets in code or logs), ask first (auth changes, new sensitive data, CORS, uploads, new integrations, rate limits, elevated roles), never do. If your organization has a mandatory security policy or scanners, they win over this skill. Use when a change accepts untrusted input, touches auth, sessions, secrets, uploads, server-side fetches, destructive operations on derived paths or a new dependency, or when the user says security review, harden, threat model or OWASP."
+description: "Harden code against attack from a threat model: trust boundaries, assets, STRIDE per boundary, abuse cases as the first tests. Use for input handling, auth or secrets."
+disable-model-invocation: true
 ---
 
 # Security and hardening

@@ -1,6 +1,6 @@
 ---
 name: incremental-implementation
-description: Build a plan one slice at a time. Each slice is the smallest complete change, ends in a pull request (or a new revision of one) whose CI is green and whose done check passed, and gets a fresh-context review before the next slice starts. Fresh worker or subagent per slice when slices are independent. Rule 0 simplicity, scope discipline (log, do not fix, anything outside the slice), safe defaults, rollback-friendly. CI on the change is the gate, not a local run. Use when the user says "build", "implement the plan", "build S1", "work the frontier", "next slice", or when a plan or a one-PR spec is ready to implement.
+description: "Build a plan one slice at a time: each slice is the smallest complete change, green in CI, passes its done check, and is reviewed fresh before the next starts."
 ---
 
 # Build

@@ -1,6 +1,7 @@
 ---
 name: deprecation-and-migration
-description: "Retire old code and move its callers safely. Code is a liability, Hyrum's law makes removal hard, so decide first (still unique value, who depends on it, is there a replacement), choose advisory or compulsory, build and prove the replacement, announce with a migration guide, migrate callers yourself, then remove only at zero usage. For internal APIs with no outside users, migrate every caller and delete the old API in the same wave instead of keeping a compatibility layer. Includes expand and contract for schema changes and a worked rename with a one-release redirect. Use when replacing or sunsetting a system, API, library, flag, skill or command, consolidating duplicates, renaming something others call, or deciding whether to keep or remove legacy code."
+description: "Retire old code and move its callers safely: decide first, pick advisory or compulsory, prove the replacement, migrate in small steps, then delete."
+disable-model-invocation: true
 ---
 
 # Deprecation and migration

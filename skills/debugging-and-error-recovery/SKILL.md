@@ -1,6 +1,7 @@
 ---
 name: debugging-and-error-recovery
-description: "Find and fix the real cause of a failure. Stop the line, build a feedback loop that goes red on this bug, reproduce and minimise, rank falsifiable hypotheses with confidence and what would change your mind, fix at the first place the system went wrong, add a regression guard, verify end to end. When it cannot be reproduced locally, debug in production with logs, metrics, a sibling control and per-unit ratios. Carries 17 principles mined from real production investigations (check the instrument first, find a control, ask why now against every kind of change, expect a hidden condition plus a trigger, look for silent caps). Redact secrets, read before you mutate, present the diagnosis and ask before a risky fix, and treat auto-recovered as unexplained. Use when a test fails, a build breaks, an alarm fires, behavior changed, something worked yesterday, or the user says debug, diagnose, investigate, root cause, why is this failing, or it broke."
+description: "Find and fix the real cause of a failure: a feedback loop that goes red, reproduce and minimise, ranked falsifiable hypotheses, fix at the root, add a regression test."
+disable-model-invocation: true
 ---
 
 # Debugging and error recovery

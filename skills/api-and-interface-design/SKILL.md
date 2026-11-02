@@ -1,6 +1,7 @@
 ---
 name: api-and-interface-design
-description: Design module seams, APIs, config keys, schemas and other contracts so they are deep, hard to misuse and safe to roll out and back. Contract first, every observable behavior is a contract (Hyrum), behavior declared by the injected implementation and never inferred from it, validate at boundaries and trust inside, illegal states unrepresentable, additive changes only while old and new versions run together. Use when the user says "design the interface", "where should the seam go", "what should the API look like", "add a config key", "change this schema", "is this a breaking change", or when a plan slice produces something other slices consume.
+description: "Design seams, APIs, config keys and schemas that are deep, hard to misuse, and safe to roll out and back. Use when adding or changing a contract."
+disable-model-invocation: true
 ---
 
 # Interfaces

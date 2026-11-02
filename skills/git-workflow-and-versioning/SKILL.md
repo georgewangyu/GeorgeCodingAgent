@@ -1,6 +1,6 @@
 ---
 name: git-workflow-and-versioning
-description: "Keep every change reviewable, reversible and safe to publish. Atomic commits whose message says why, separate concerns, size the change, save points before risky steps then squash before review, one change per checkout (no git worktrees; clone again if parallel work truly needs isolation), push safety (fetch first, rebase on the fresh base, never force a shared branch), guardrail hooks for destructive commands, redact before anything leaves the machine, an explicit finish step with checks green, semver and a changelog for anything with consumers, and bisect to find the commit that broke it. Use when committing, splitting a messy tree into commits, branching, rebasing, pushing, opening or finishing a pull request, cutting a release or tag, writing a changelog, or hunting the commit that introduced a bug."
+description: "Keep every change reviewable, reversible and safe to publish: atomic commits that say why, separate concerns, small changes, never publish without the user's yes."
 ---
 
 # Git workflow and versioning

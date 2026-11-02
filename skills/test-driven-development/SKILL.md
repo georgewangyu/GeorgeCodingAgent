@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: "Prove a change works with the most real test that is still cheap. Use the repo's own verification skill first. Real-world first ladder: an integration or component test at the seam with real collaborators, then the running environment itself (staging behavior, load tests, integration runs, metrics after deploy), and unit tests only for pure logic with real edge cases. Every test names the real failure it would catch. Loose TDD: strict red-green where the loop is cheap, no new test over a bad one, tests at agreed seams not per method, prove-it for bugs, one seam at a time. Coverage met at the gate with value tests, never padding. Use when writing, fixing or reviewing tests, when a bug report arrives, when a coverage gate fails, or when the user says test this, add tests, TDD, red green, regression test, or prove it."
+description: "Prove a change works with the most real test that is still cheap, each test naming the failure it catches; a failing regression test first for every bug."
 ---
 
 # Test-driven development

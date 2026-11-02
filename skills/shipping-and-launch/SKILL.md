@@ -1,6 +1,7 @@
 ---
 name: shipping-and-launch
-description: "Launch a change so it is reversible, observable and incremental. A short pre-launch checklist, a rollback path that still works after the change (not just before it), the alarms and dashboards live before release, testing at the target load and not below it, measurable rollback criteria per stage, a worst case that includes losing one zone, feature flags that separate deploy from release, staged rollout against a baseline, and a watched first hour. Use when preparing a production deploy or launch, writing or reviewing a rollout or change plan, a capacity or config change, enabling a feature flag for users, or asking what must be in place before shipping."
+description: "Launch a change so it is reversible, observable and incremental: a short checklist, a working rollback, alarms live before release, and staged rollout."
+disable-model-invocation: true
 ---
 
 # Shipping and launch

@@ -1,6 +1,7 @@
 ---
 name: performance-optimization
-description: "Make something faster or cheaper only with measurement. Write the claim first, vet the measurement (the limiter, tuned like production, physical limits, errors counted, five alternating runs, end-to-end share, the work actually happened), then measure, find the bottleneck, change one thing, keep or revert (neutral is a revert), guard the metric, and log every attempt including the reverted ones. Use when a latency, throughput, GC, memory, CPU or cost problem is reported, before claiming a speedup or a regression, when tuning a pool, a timeout or a runtime flag, or when the user says optimize, perf, benchmark, load test or why is this slow."
+description: "Make something faster or cheaper only with measurement: state the claim, vet the benchmark, find the limiter, and prove the gain end to end."
+disable-model-invocation: true
 ---
 
 # Performance optimization

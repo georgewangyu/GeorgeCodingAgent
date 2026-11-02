@@ -1,6 +1,7 @@
 ---
 name: planning-and-task-breakdown
-description: Turn a spec into ordered, verifiable vertical slices that map 1:1 to pull requests, issue-tracker tickets and worker briefs. Brief mode by default (per slice goal, done check, how to verify, blocking edges, likely files, size). Full mode only when earned (a multi-PR series, cross-package rollout ordering, or work bigger than one session) adds a design contract, rollout table and a decision list. Plan mode, no code. Never overwrites an unfinished plan; a re-plan appends a revision. Use when the user says "plan", "break this down", "slice this", "what are the PRs", "plan the series", "deepen the plan", or after spec settles what we are building.
+description: "Turn a spec into ordered, verifiable slices that map one to one to pull requests and worker briefs, each with a done check. Use when a spec is ready to plan."
+disable-model-invocation: true
 ---
 
 # Plan

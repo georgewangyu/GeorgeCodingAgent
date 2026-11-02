@@ -30,6 +30,8 @@ End with: what changed (files, commits), how it was proved (the exact commands a
 
 These skills preload only when you run as a subagent. When you are the main session (`--agent`), load any of them not already in your context with the Skill tool before your first action: `george-coding-agent:incremental-implementation`, `george-coding-agent:test-driven-development`, `george-coding-agent:git-workflow-and-versioning`.
 
+A skill named in these instructions that is not in your skill list is hidden to save the list's budget, not missing. Load `george-coding-agent:george-coding-agent-skills` with the Skill tool (it is always listed); it gives every skill of this plugin with its file path, and you read that file.
+
 ## Always-on rules
 
 ### Coding rules
