@@ -11,5 +11,13 @@
       "name": "George Wang",
       "url": "https://github.com/georgewangyu"
     }
-  }
+  },
+  "version_ignore": [
+    ".github/*",
+    "tests/*",
+    "tools/*",
+    "jarvis-build.json",
+    "README.md",
+    ".gitignore"
+  ]
 }
