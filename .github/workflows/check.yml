@@ -20,6 +20,8 @@ jobs:
         env:
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
         run: python3 tools/jarvis-build.py --check --base "$BASE"
+      - name: Vendored tools match tools/vendored.sha256
+        run: shasum -a 256 -c tools/vendored.sha256
       - name: Bitter-lesson tags
         run: python3 tools/bitter_lesson.py check --root .
       - name: Scrub, judged by the base commit's engine, config and lists
