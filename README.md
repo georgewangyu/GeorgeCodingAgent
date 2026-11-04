@@ -39,6 +39,7 @@ Optional skills from other plugins (`grill-me`, `brainstorm`, `mistake-miner`, t
 - `skills/`: the skills. `skills/role-coding` and `skills/role-reviewer` are generated.
 - Generated, never hand-edit: `agents/`, `skills/role-*/`, `.claude-plugin/`, `.codex-plugin/`, `.agents/plugins/`, `AGENTS.md`, `CLAUDE.md`. Rebuild with `python3 tools/jarvis-build.py`; CI runs `--check`.
 - `tools/bitter_lesson.py`: the bitter-lesson tag checker.
+- `tools/ci/scrub-gate.sh <base>`: the CI scrub gate. The base commit's engine, config and marker lists judge the change, so a change cannot exempt itself by editing `.scrub-lint.conf`, the lists or the engine. Its baseline may only shrink (a first baseline needs a manual exception), and a base CI cannot find fails the gate. CI also runs the change's own config, and warns when a change edits the gate.
 
 ## Skills
 

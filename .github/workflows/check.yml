@@ -22,5 +22,9 @@ jobs:
         run: python3 tools/jarvis-build.py --check --base "$BASE"
       - name: Bitter-lesson tags
         run: python3 tools/bitter_lesson.py check --root .
-      - name: Scrub (public marker list)
+      - name: Scrub, judged by the base commit's engine, config and lists
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+        run: tools/ci/scrub-gate.sh "$BASE"
+      - name: Scrub with this change's own config and lists
         run: tools/scrub-lint/scripts/scrub-lint check --lists public
