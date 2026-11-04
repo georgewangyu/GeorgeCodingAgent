@@ -40,7 +40,7 @@ Pair every problem with a fix. Acknowledge real strengths. Avoid absolute claims
 
 ## Findings file
 
-Write to the path the caller names (default `<doc-slug>-review.md`). Final message: a one-line verdict plus the path.
+The read-only reviewer returns the findings in its final message: a one-line verdict, then the findings in this format. The caller saves that message to the findings file (default `<doc-slug>-review.md`).
 
 ```markdown
 # <Doc title>: review

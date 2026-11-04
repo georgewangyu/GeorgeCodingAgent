@@ -99,7 +99,7 @@ Every seam a later PR relies on is named here. Every worker brief in the series 
 
 ## Review gate [bl: strong]
 
-A full spec goes to a fresh-context reviewer twice before anyone builds: a normal pass (with the brief and context) and a blind pass (the doc only). Fix or answer every finding. Optional lenses when the stakes call for them:
+A full spec goes to a fresh-context reviewer twice before anyone builds: a normal pass (with the brief and context) and a blind pass (the doc only). Pass the doc and any checklist by absolute path; the reviewer has no Skill tool. Fix or answer every finding. Optional lenses when the stakes call for them:
 
 - **Engineering:** architecture, data flow, edge cases, test coverage, performance.
 - **Product:** is this the right problem, and is the scope too big or too small.

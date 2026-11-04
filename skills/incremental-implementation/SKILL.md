@@ -83,7 +83,7 @@ No drive-by refactors, import reshuffles, modernized syntax or extra features. N
 You generate, a fresh read-only reviewer evaluates. Never grade your own slice in your own context.
 
 1. Write the slice's diff to a file (`git diff <base>... > /tmp/<slice>.patch`).
-2. Spawn `george-coding-agent:reviewer` (in Codex: `codex exec --sandbox read-only` with a prompt that starts "Load `$role-reviewer` first"; in another tool without agents: a fresh subagent told not to edit anything) with only the patch, the slice's contract (goal and done check) and the checklist: `code-review-and-quality/references/cr-review-checklist.md` for code, `doubt-driven-review/references/design-review-checklist.md` for a spec or plan.
+2. Spawn `george-coding-agent:reviewer` (in Codex: `codex exec --sandbox read-only` with a prompt that starts "Load `$role-reviewer` first"; in another tool without agents: a fresh subagent told not to edit anything) with only the patch, the slice's contract (goal and done check) and the checklist, each by absolute path (the router skill `george-coding-agent-skills` gives every skill's file path; the reviewer has no Skill tool and may run outside the plugin folder): `code-review-and-quality/references/cr-review-checklist.md` for code, `doubt-driven-review/references/design-review-checklist.md` for a spec or plan.
 3. Fix each real finding in the same slice. A finding you reject gets a one-line reason in the ledger.
 4. Re-review the new diff the same way until the reviewer returns no blocking findings, capped at three rounds. Past the cap, write a ruling (see the fix loop) instead of a fourth round.
 5. Optional blind pass for a risky slice: one more reviewer given only the patch, no contract and no checklist, to catch what the framing hid.

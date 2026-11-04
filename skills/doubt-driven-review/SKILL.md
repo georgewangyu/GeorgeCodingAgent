@@ -59,7 +59,7 @@ A missing contract is the first finding. Without one the reviewer can only judge
 | A claim or a number, no artifact | `principles-scientific-method` or `principles-first-principles` | prediction or Fermi bound |
 | Anything else | a general-purpose subagent | the adversarial prompt below |
 
-Run `reviewer` (the read-only agent in this plugin, in Claude Code `george-coding-agent:reviewer`) with only the artifact, the contract and the checklist. In a tool without agents, start a fresh session that loads `role-reviewer` and give it the same three things.
+Run `reviewer` (the read-only agent in this plugin, in Claude Code `george-coding-agent:reviewer`) with only the artifact, the contract and the checklist, each by absolute path (the reviewer has no Skill tool and may run outside this plugin's folder). In a tool without agents, start a fresh session that loads `role-reviewer` and give it the same three things.
 
 Pick one or two lenses and name each with a one-line reason, for example "operations: the change reorders a deploy". Every lens beyond two dilutes the brief.
 
@@ -86,7 +86,7 @@ CONTRACT: <contract>
 LENS: <lens and reason>
 ```
 
-Ask each reviewer to write its findings to a file you name, so a re-run can diff against it.
+Save each reviewer's final message (its findings) to a file you name, so a re-run can diff against it. The reviewer is read-only and returns findings in its reply; it does not write the file.
 
 ## 4. Second model for one-way doors [bl: strong]
 

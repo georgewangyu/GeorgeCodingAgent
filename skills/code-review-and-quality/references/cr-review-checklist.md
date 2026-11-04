@@ -36,7 +36,7 @@ Pagination not looped. Streams and connections not closed on error paths. Except
 
 ## Findings file
 
-Write to the path the caller names (default `review-findings.md`; add `-blind` for a blind pass). Final message: a one-line verdict plus the path.
+The read-only reviewer returns the findings in its final message: a one-line verdict, the counts by severity, then the findings in this format. The caller saves that message to the findings file (default `review-findings.md`; add `-blind` for a blind pass).
 
 ```markdown
 # <PR title>: review

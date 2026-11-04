@@ -22,7 +22,7 @@ Not for: a design doc or a change plan. A one-way decision mid-build: `doubt-dri
 | Situation | Use |
 |---|---|
 | Someone else's PR | this method; read the review bot's comments first and never duplicate them |
-| Your change before review | this method in a fresh context: this plugin's read-only `reviewer` agent (`george-coding-agent:reviewer`) with only the diff, its contract and [`references/cr-review-checklist.md`](references/cr-review-checklist.md), plus a blind pass that sees only the patch. In a tool without agents, a fresh session that loads `role-reviewer` |
+| Your change before review | this method in a fresh context: this plugin's read-only `reviewer` agent (`george-coding-agent:reviewer`) with only the diff, its contract and [`references/cr-review-checklist.md`](references/cr-review-checklist.md), each by absolute path (the router skill `george-coding-agent-skills` gives every skill's file path; the reviewer has no Skill tool and may run outside the plugin folder), plus a blind pass that sees only the patch. In a tool without agents, a fresh session that loads `role-reviewer` |
 | High-stakes or unfamiliar change | add `doubt-driven-review` for a second model on the riskiest claim |
 | Security exposure | `security-and-hardening` |
 
