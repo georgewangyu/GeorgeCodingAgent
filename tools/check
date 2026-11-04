@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+base="${1:-HEAD}"
+python3 tools/jarvis-build.py --check --base "$base"
+shasum -a 256 -c --quiet tools/vendored.sha256
+python3 tools/bitter_lesson.py check --root .
+tools/ci/scrub-gate.sh "$base"
+tools/scrub-lint/scripts/scrub-lint check --lists public
+ruff check --config tools/ruff.toml tools/

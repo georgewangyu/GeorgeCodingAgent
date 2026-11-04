@@ -10,23 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
-      - name: Generated adapters match sources, frontmatter, duplicate skill names, version bumped
+      - name: Install dev tools
+        run: pip install -r tools/requirements-dev.txt
+      - name: tools/check (build outputs, version gate, vendored hashes, bitter-lesson tags, scrub, ruff)
         env:
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
-        run: python3 tools/jarvis-build.py --check --base "$BASE"
-      - name: Vendored tools match tools/vendored.sha256
-        run: shasum -a 256 -c tools/vendored.sha256
-      - name: Bitter-lesson tags
-        run: python3 tools/bitter_lesson.py check --root .
-      - name: Scrub, judged by the base commit's engine, config and lists
-        env:
-          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
-        run: tools/ci/scrub-gate.sh "$BASE"
-      - name: Scrub with this change's own config and lists
-        run: tools/scrub-lint/scripts/scrub-lint check --lists public
+        run: tools/check "$BASE"

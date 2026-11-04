@@ -40,6 +40,7 @@ Optional skills from other plugins (`grill-me`, `brainstorm`, `mistake-miner`, t
 - Generated, never hand-edit: `agents/`, `skills/role-*/`, `.claude-plugin/`, `.codex-plugin/`, `.agents/plugins/`, `AGENTS.md`, `CLAUDE.md`. Rebuild with `python3 tools/jarvis-build.py`; CI runs `--check`.
 - `tools/bitter_lesson.py`: the bitter-lesson tag checker.
 - [`tools/VENDORED.md`](tools/VENDORED.md): where each vendored tool comes from. CI fails if a vendored file changes without its hash in `tools/vendored.sha256`.
+- `tools/check [base]`: the one check CI runs (build outputs, version gate, vendored hashes, bitter-lesson tags, scrub, ruff). Run it before you push. To run it on every commit: `pip install -r tools/requirements-dev.txt`, then `ln -s ../../tools/githooks/pre-commit .git/hooks/pre-commit`. Link the hook rather than setting `core.hooksPath`, which would switch off the scrub-lint pre-push hook in `.git/hooks`.
 - `tools/ci/scrub-gate.sh <base>`: the CI scrub gate. The base commit's engine, config and marker lists judge the change, so a change cannot exempt itself by editing `.scrub-lint.conf`, the lists or the engine. Its baseline may only shrink (a first baseline needs a manual exception), and a base CI cannot find fails the gate. CI also runs the change's own config, and warns when a change edits the gate.
 
 ## Skills
