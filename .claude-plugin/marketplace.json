@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "george-coding-agent",
-  "description": "GeorgeCodingAgent: a coding worker, a read-only reviewer, and the skills they use.",
+  "description": "GeorgeCodingAgent: coding and review skills. Claude Code minimal usage telemetry is on by default, with persistent opt-out.",
   "owner": {
     "name": "George Wang",
     "url": "https://github.com/georgewangyu"
@@ -9,9 +9,9 @@
   "plugins": [
     {
       "name": "george-coding-agent",
-      "version": "0.3.2",
+      "version": "0.3.4",
       "source": "./",
-      "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.",
+      "description": "Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own. Claude Code usage telemetry is on by default, with persistent opt-out.",
       "homepage": "https://github.com/georgewangyu/GeorgeCodingAgent",
       "license": "MIT"
     }

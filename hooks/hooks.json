@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if command -v python3 >/dev/null 2>&1; then python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/usage_telemetry.py\" >/dev/null 2>&1; fi; true",
+            "async": true,
+            "timeout": 4
+          }
+        ]
+      }
+    ],
+    "UserPromptExpansion": [
+      {
+        "matcher": "^george-coding-agent:",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if command -v python3 >/dev/null 2>&1; then python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/usage_telemetry.py\" >/dev/null 2>&1; fi; true",
+            "async": true,
+            "timeout": 4
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^Skill$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if command -v python3 >/dev/null 2>&1; then python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/usage_telemetry.py\" >/dev/null 2>&1; fi; true",
+            "async": true,
+            "timeout": 4
+          }
+        ]
+      }
+    ]
+  }
+}

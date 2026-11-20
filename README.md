@@ -43,6 +43,102 @@ Optional skills from other plugins (`grill-me`, `brainstorm`, `mistake-miner`, t
 - `tools/check [base]`: the one check CI runs (build outputs, version gate, vendored hashes, bitter-lesson tags, scrub, ruff). Run it before you push. To run it on every commit: `pip install -r tools/requirements-dev.txt`, then `ln -s ../../tools/githooks/pre-commit .git/hooks/pre-commit`. Link the hook rather than setting `core.hooksPath`, which would switch off the scrub-lint pre-push hook in `.git/hooks`.
 - `tools/ci/scrub-gate.sh <base>`: the CI scrub gate. The base commit's engine, config and marker lists judge the change, so a change cannot exempt itself by editing `.scrub-lint.conf`, the lists or the engine. Its baseline may only shrink (a first baseline needs a manual exception), and a base CI cannot find fails the gate. CI also runs the change's own config, and warns when a change edits the gate.
 
+## Usage telemetry and persistent opt-out (Claude Code only)
+
+**Minimal usage telemetry is on by default in this version.** It sends the
+small event schema below to the authorized **GEORGE PUBLIC TOOLS** PostHog
+project shared with other George public tools. It never sends your content.
+
+To disable it persistently **before starting Claude with the plugin**, run:
+
+```sh
+python3 /path/to/GeorgeCodingAgent/scripts/usage_telemetry.py disable
+```
+
+Use your checkout or installed plugin root for that path. The command stores
+`{"enabled": false}` in
+`${XDG_CONFIG_HOME:-~/.config}/george-coding-agent/telemetry.json` and exits
+without capturing anything, contacting PostHog, or creating an installation ID.
+The same JSON can be saved there directly. `status` reports effective settings;
+`enable` reverses the persistent choice. These commands never capture events.
+The package-level choice survives new shells, sessions and plugin upgrades.
+An already in-flight request cannot be recalled by a later opt-out.
+
+Inherited refusals take precedence. If `GEORGE_CODING_AGENT_TELEMETRY` exists,
+**every value other than the exact `1` disables collection**, including `0`, an
+empty value or a prior explicit non-opt-in value. `1` cannot override persistent
+`enabled:false`. `DO_NOT_TRACK`, `DISABLE_TELEMETRY`,
+`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `CI`, `CONTINUOUS_INTEGRATION` and
+`GITHUB_ACTIONS` also disable collection when nonempty and not `0`, `false` or
+`no` (case insensitive). CI never silently opts itself back in. Restart existing
+sessions when changing inherited environment variables. Persistent opt-out is
+checked again by each hook, without needing a session restart. Invalid,
+unsafe or unreadable persistent configuration fails closed before capture.
+
+The [public ingestion configuration](telemetry.json) contains a submit-only
+token and US PostHog host. It is not an account or management credential.
+Explicitly authorized shared collection uses the fixed `package` property and
+separate event namespaces to distinguish tools. An operator may override
+`GEORGE_CODING_AGENT_POSTHOG_TOKEN` and `GEORGE_CODING_AGENT_POSTHOG_HOST` together
+for another authorized collector. Only the exact US and EU PostHog ingestion
+hosts are accepted. Never supply a personal API key or reuse an unauthorized
+project. Public tool sharing must be explicitly authorized by the maintainer.
+
+Two production event types are sent:
+
+- `george_coding_agent.first_seen`: first observed plugin session or eligible
+  invocation for a random local installation ID, while collection is enabled.
+  This is an adoption proxy, **not a count of downloads, installs, people, or all
+  active users**. Prior opt-outs are excluded.
+- `george_coding_agent.skill_invoked`: an allowlisted skill in the exact
+  `george-coding-agent:` namespace, with `invocation_source` of `typed` or `agent`.
+  Typed use comes from `UserPromptExpansion`; agent use comes from `PreToolUse`
+  of `Skill`. These count dispatch attempts, not successful edits or completions.
+  Reading skills by file path, unqualified names, other plugins and unsupported
+  hosts are not counted. Missing events do not establish no use.
+
+Each event includes only random installation ID, plugin/package name and
+version, `host=claude_code`, schema version, test flag, and (for invocations)
+public skill slug and source enum. No prompt, arguments, transcript, code, file
+or repository path, account/email, session/tool ID, machine ID, hostname or
+result is sent. PostHog person profiles and GeoIP enrichment are disabled;
+`$ip` is null. The receiver necessarily sees network metadata, including a
+transport IP, so this is pseudonymous telemetry, not network anonymity. No SDK
+autocapture, replay, transcript parsing or background daemon is used.
+
+Hooks run asynchronously with Python 3.9+, POSIX locking and `curl`. Missing
+prerequisites, bad configuration, oversized input, locked/corrupt state and
+transport failures silently drop events. Each process has a three-second wall
+limit; curl has a two-second transfer limit and no retries. There is no offline
+queue. Concurrent events may drop; a crash around successful transport can
+duplicate first-seen. HTTP acceptance is not proof of dashboard ingestion.
+
+Private state under `${XDG_STATE_HOME:-~/.local/state}/george-coding-agent/telemetry/`
+contains only a random UUID and first-seen flag. It contains no hook input.
+Deleting that folder resets the identity, not your persistent opt-out. Received
+event retention/access/deletion is controlled by the maintainer's PostHog project.
+
+For synthetic transport checks only, set
+`GEORGE_CODING_AGENT_TELEMETRY_SMOKE=1`. This uses separate
+`george_coding_agent.smoke.first_seen` / `.smoke.skill_invoked` events,
+`telemetry_test=true` and a separate local `telemetry-smoke` identity/state.
+It never marks production first-seen and still honors all opt-outs and CI.
+Exclude smoke namespaces/test events from adoption analysis. Ordinary events
+have `telemetry_test=false`.
+
+Claude loads [hooks/hooks.json](hooks/hooks.json) from a normal marketplace
+installation or `claude --plugin-dir /path/to/GeorgeCodingAgent`; commands use
+`${CLAUDE_PLUGIN_ROOT}`. A supported plugin update/new session is needed for
+changed hooks. Installed caches are never patched in place. Standalone agent
+copies and the Codex adapter do not enable these hooks. Older Claude hosts that
+lack `UserPromptExpansion` cannot report typed use; validate your exact host.
+
+Sources: [Claude hook events and inputs](https://code.claude.com/docs/en/hooks),
+[plugin hook discovery](https://code.claude.com/docs/en/plugins-reference#hooks),
+[PostHog capture API](https://posthog.com/docs/api/capture),
+[person-profile control](https://posthog.com/docs/product-analytics/capture-events),
+[IP and GeoIP controls](https://posthog.com/docs/privacy/data-collection).
+
 ## Skills
 
 | Skill | What it does |

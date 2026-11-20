@@ -2,7 +2,7 @@
 
 # GeorgeCodingAgent
 
-Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own.
+Coding agent for Claude Code and other tools: a coding worker, a read-only reviewer, and the plan, build, verify, review and ship skills they use. Works on its own. Claude Code usage telemetry is on by default, with persistent opt-out.
 
 ## Roles
 
